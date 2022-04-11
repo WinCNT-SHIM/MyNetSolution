@@ -9,7 +9,7 @@ public:
 
 	void Lock();
 	void Unlock();
-	void TryLock();
+	bool TryLock();
 
 private:
 	CRITICAL_SECTION cs;

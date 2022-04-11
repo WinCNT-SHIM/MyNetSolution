@@ -20,7 +20,7 @@ void MySimpleMutex::Unlock()
 	LeaveCriticalSection(&cs);
 }
 
-void MySimpleMutex::TryLock()
+bool MySimpleMutex::TryLock()
 {
-	TryEnterCriticalSection(&cs);
+	return TryEnterCriticalSection(&cs);
 }
