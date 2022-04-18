@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyFirstThreadProject", "MyF
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MySimpleMutex", "MySimpleMutex\MySimpleMutex.vcxproj", "{75A7A3F7-5D8C-443A-B793-4A80B4DCBBE2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FirstWinServer", "FirstWinServer\FirstWinServer.vcxproj", "{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{75A7A3F7-5D8C-443A-B793-4A80B4DCBBE2}.Release|x64.Build.0 = Release|x64
 		{75A7A3F7-5D8C-443A-B793-4A80B4DCBBE2}.Release|x86.ActiveCfg = Release|Win32
 		{75A7A3F7-5D8C-443A-B793-4A80B4DCBBE2}.Release|x86.Build.0 = Release|Win32
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Debug|x64.ActiveCfg = Debug|x64
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Debug|x64.Build.0 = Debug|x64
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Debug|x86.ActiveCfg = Debug|Win32
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Debug|x86.Build.0 = Debug|Win32
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Release|x64.ActiveCfg = Release|x64
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Release|x64.Build.0 = Release|x64
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Release|x86.ActiveCfg = Release|Win32
+		{236AE32B-DA8B-4ED9-9B84-BA16BAB8E185}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
