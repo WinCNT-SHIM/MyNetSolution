@@ -275,9 +275,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
 		case FD_READ:
-            //g_ClientManager.OnRecv((SOCKET) wParam);
-
-            ///*
+            g_ClientManager.OnRecv((SOCKET) wParam);
+            textList.push_back(g_ClientManager.GetLastDebugString());
+            /*
             // recv: 리시브
             // wParam를 리시브 버퍼에 쓴다
 			nRecv = recv((SOCKET)wParam, recvBuffer, DATA_BUFSIZE, 0);
@@ -292,7 +292,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			}
 
 			textList.push_back(buffer);
-			//*/
+			*/
 
 			InvalidateRect(hWnd, NULL, TRUE);
 
