@@ -1,8 +1,9 @@
-﻿// FirstWinServer.cpp : 애플리케이션에 대한 진입점을 정의합니다.
+﻿// FirstWinServer.cpp : TCP 소켓 연결
 //
 
 #include "framework.h"
 #include "FirstWinServer.h"
+#include "ClientManager.h"      // 클라이언트 관리
 #include <list>
 #include <string>
 
@@ -252,6 +253,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		{
 
 		case FD_ACCEPT:
+        {
 			clientSocket = accept(wParam, (SOCKADDR*)&clientAddr, &sockaddrLen);
             // FD_READ | FD_WRITE | FD_CLOSE의 시그널이 오면
             // WM_SOCKET으로 알려달라고 OS에게 부탁하는 것
@@ -259,14 +261,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 			WSAAddressToString((struct sockaddr*)&clientAddr, sizeof(struct sockaddr_in), 0, ip, (LPDWORD)&ipLen);
 
-			wsprintf(buffer, TEXT("Client Accepted %s"), ip);
+			wstring ws(ip);
+			string ip_string(ws.begin(), ws.end());
+			g_ClientManager.InsertNewClient(clientSocket, ip_string);
+
+			wsprintf(buffer, TEXT("Client Accepted %s(%d)"), ip, g_ClientManager.NumberOfClient());
 
 			textList.push_back(buffer);
 			InvalidateRect(hWnd, NULL, TRUE);
 
-			break;
+
+		}
+        break;
 
 		case FD_READ:
+            //g_ClientManager.OnRecv((SOCKET) wParam);
+
+            ///*
             // recv: 리시브
             // wParam를 리시브 버퍼에 쓴다
 			nRecv = recv((SOCKET)wParam, recvBuffer, DATA_BUFSIZE, 0);
@@ -280,8 +291,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				wsprintf(buffer, TEXT("Recv %d, %d"), nRecv, WSAGetLastError());
 			}
 
-
 			textList.push_back(buffer);
+			//*/
 
 			InvalidateRect(hWnd, NULL, TRUE);
 
@@ -292,19 +303,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 
 		case FD_CLOSE:
-
+		{
+            string _ClientIP;
+			g_ClientManager.RemoveClient((SOCKET)wParam, _ClientIP);
 			closesocket((SOCKET)wParam);
 
-			wsprintf(buffer, TEXT("Client Closed"));
+			wstring _ClientIP_w;
+			_ClientIP_w.assign(_ClientIP.begin(), _ClientIP.end());
+
+			// 어떤 클라이언트가 종료되었는지 찍어보자
+			// 
+			wsprintf(buffer, TEXT("Client Closed %s(%d)"), _ClientIP_w.c_str(), g_ClientManager.NumberOfClient());
 
 			textList.push_back(buffer);
 
 			InvalidateRect(hWnd, NULL, TRUE);
-
-			break;
+        }
+		break;
 
 		}
-
 		break;
 	}
 	// ==================== 네트워크 프로그래밍 ====================
